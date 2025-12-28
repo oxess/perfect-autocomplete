@@ -1,0 +1,109 @@
+/* Animation styles for Perfect Autocomplete */
+
+/* Dropdown open/close animations */
+.pac-dropdown {
+  transform-origin: top center;
+}
+
+.pac-dropdown[data-state='open'] {
+  animation: pac-fade-in var(--pac-animation-duration) var(--pac-animation-easing);
+}
+
+.pac-dropdown[data-state='closing'] {
+  animation: pac-fade-out var(--pac-animation-duration) var(--pac-animation-easing);
+}
+
+@keyframes pac-fade-in {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+@keyframes pac-fade-out {
+  from {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scaleY(0.95) translateY(-4px);
+  }
+}
+
+/* Top placement animations */
+.pac-dropdown[data-placement^='top'] {
+  transform-origin: bottom center;
+}
+
+.pac-dropdown[data-placement^='top'][data-state='open'] {
+  animation: pac-fade-in-top var(--pac-animation-duration) var(--pac-animation-easing);
+}
+
+.pac-dropdown[data-placement^='top'][data-state='closing'] {
+  animation: pac-fade-out-top var(--pac-animation-duration) var(--pac-animation-easing);
+}
+
+@keyframes pac-fade-in-top {
+  from {
+    opacity: 0;
+    transform: scaleY(0.95) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+@keyframes pac-fade-out-top {
+  from {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scaleY(0.95) translateY(4px);
+  }
+}
+
+/* Loading spinner animation */
+@keyframes pac-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pac-loading__spinner {
+  display: inline-block;
+  width: var(--pac-spinner-size);
+  height: var(--pac-spinner-size);
+  border: var(--pac-spinner-border-width) solid var(--pac-border-color);
+  border-top-color: var(--pac-text-color);
+  border-radius: 50%;
+  animation: pac-spin 0.6s linear infinite;
+}
+
+/* Item hover/highlight transition */
+.pac-item {
+  transition: background-color var(--pac-animation-duration) var(--pac-animation-easing);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .pac-dropdown[data-state='open'],
+  .pac-dropdown[data-state='closing'] {
+    animation: none;
+  }
+
+  .pac-loading__spinner {
+    animation: none;
+  }
+
+  .pac-item {
+    transition: none;
+  }
+}

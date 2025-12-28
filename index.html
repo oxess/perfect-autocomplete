@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfect Autocomplete Demo</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        background: #f5f5f5;
+      }
+
+      h1 {
+        color: #1f2937;
+        margin-bottom: 8px;
+      }
+
+      p {
+        color: #6b7280;
+        margin-bottom: 24px;
+      }
+
+      .demo-container {
+        background: white;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 8px;
+      }
+
+      input[type="search"] {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.15s, box-shadow 0.15s;
+      }
+
+      input[type="search"]:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .selected-value {
+        margin-top: 16px;
+        padding: 12px;
+        background: #f3f4f6;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 14px;
+        color: #374151;
+      }
+
+      .event-log {
+        margin-top: 24px;
+        padding: 16px;
+        background: #1f2937;
+        border-radius: 8px;
+        color: #9ca3af;
+        font-family: monospace;
+        font-size: 12px;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .event-log div {
+        padding: 4px 0;
+        border-bottom: 1px solid #374151;
+      }
+
+      .event-log div:last-child {
+        border-bottom: none;
+      }
+
+      .event-log .event-name {
+        color: #34d399;
+      }
+
+      .event-log .event-time {
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Perfect Autocomplete</h1>
+    <p>A high-quality, accessible autocomplete web component</p>
+
+    <div class="demo-container">
+      <label for="search-input">Search for a user:</label>
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Type to search..."
+        autocomplete="off"
+      />
+      <perfect-autocomplete
+        for="search-input"
+        url="https://jsonplaceholder.typicode.com/users"
+        query-param="q"
+        min-chars="1"
+        debounce="300"
+        max-items="5"
+        placement="bottom-start"
+      ></perfect-autocomplete>
+
+      <div class="selected-value" id="selected-value">
+        Selected: (none)
+      </div>
+
+      <div class="event-log" id="event-log">
+        <div><span class="event-time">[Ready]</span> Event log initialized</div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { register } from './src/index.ts'
+
+      // Register the custom element
+      register()
+
+      // Get elements
+      const autocomplete = document.querySelector('perfect-autocomplete')
+      const selectedValue = document.getElementById('selected-value')
+      const eventLog = document.getElementById('event-log')
+
+      // Log helper
+      function log(eventName, detail = null) {
+        const time = new Date().toLocaleTimeString()
+        const div = document.createElement('div')
+        div.innerHTML = `<span class="event-time">[${time}]</span> <span class="event-name">${eventName}</span>${
+          detail ? `: ${JSON.stringify(detail)}` : ''
+        }`
+        eventLog.appendChild(div)
+        eventLog.scrollTop = eventLog.scrollHeight
+      }
+
+      // Listen for events
+      autocomplete.addEventListener('pac:open', () => {
+        log('pac:open')
+      })
+
+      autocomplete.addEventListener('pac:close', () => {
+        log('pac:close')
+      })
+
+      autocomplete.addEventListener('pac:select', (e) => {
+        const { item, index } = e.detail
+        log('pac:select', { label: item.label, index })
+        selectedValue.textContent = `Selected: ${item.label} (${item.value})`
+      })
+
+      autocomplete.addEventListener('pac:items-loaded', (e) => {
+        const { items, query } = e.detail
+        log('pac:items-loaded', { count: items.length, query })
+      })
+
+      autocomplete.addEventListener('pac:error', (e) => {
+        const { error } = e.detail
+        log('pac:error', { message: error.message })
+      })
+
+      // Custom render item (optional)
+      // autocomplete.renderItem = (item, html, { highlighted }) => {
+      //   return html`
+      //     <div class="custom-item ${highlighted ? 'highlighted' : ''}">
+      //       <strong>${item.label}</strong>
+      //       <small>${item.email}</small>
+      //     </div>
+      //   `
+      // }
+    </script>
+  </body>
+</html>

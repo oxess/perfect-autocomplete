@@ -1,0 +1,153 @@
+/* Base styles for Perfect Autocomplete */
+
+/* Import variables and animations */
+@import './variables.css';
+@import './animations.css';
+
+/* Dropdown container */
+.pac-dropdown {
+  position: absolute;
+  z-index: 9999;
+  box-sizing: border-box;
+  min-width: var(--pac-min-width);
+  max-height: var(--pac-max-height);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: var(--pac-bg-color);
+  border: 1px solid var(--pac-border-color);
+  border-radius: var(--pac-border-radius);
+  box-shadow: var(--pac-shadow);
+  font-family: var(--pac-font-family);
+  font-size: var(--pac-font-size);
+  line-height: var(--pac-line-height);
+  color: var(--pac-text-color);
+
+  /* Smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Items container */
+.pac-items {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+}
+
+/* Individual item */
+.pac-item {
+  display: flex;
+  align-items: center;
+  gap: var(--pac-gap);
+  min-height: var(--pac-item-min-height);
+  padding: var(--pac-item-padding);
+  border-radius: var(--pac-item-border-radius);
+  cursor: pointer;
+  user-select: none;
+}
+
+.pac-item:hover,
+.pac-item--highlighted {
+  background-color: var(--pac-highlight-bg);
+  color: var(--pac-highlight-text);
+}
+
+.pac-item:active {
+  opacity: 0.8;
+}
+
+/* Item image */
+.pac-item__image {
+  flex-shrink: 0;
+  width: var(--pac-image-size);
+  height: var(--pac-image-size);
+  border-radius: var(--pac-image-border-radius);
+  object-fit: cover;
+}
+
+/* Item content */
+.pac-item__content {
+  flex: 1;
+  min-width: 0; /* Enable text truncation */
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Item label */
+.pac-item__label {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Item description */
+.pac-item__description {
+  font-size: var(--pac-description-font-size);
+  color: var(--pac-placeholder-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Loading state */
+.pac-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pac-gap);
+  padding: var(--pac-padding);
+  color: var(--pac-loading-color);
+}
+
+/* Empty state */
+.pac-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pac-padding);
+  color: var(--pac-placeholder-color);
+  text-align: center;
+}
+
+/* Error state */
+.pac-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pac-padding);
+  color: var(--pac-error-color);
+  text-align: center;
+}
+
+/* Screen reader only (for live regions) */
+.pac-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus visible styles for keyboard navigation */
+.pac-item:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .pac-dropdown {
+    border: 2px solid CanvasText;
+  }
+
+  .pac-item--highlighted {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+}
