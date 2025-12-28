@@ -39,7 +39,7 @@ features:
 ```html
 <!-- Include the script -->
 <script type="module">
-  import { register } from 'perfect-autocomplete'
+  import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
   register()
 </script>
 

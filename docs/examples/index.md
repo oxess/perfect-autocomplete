@@ -39,7 +39,7 @@ Customized behavior:
 ></perfect-autocomplete>
 
 <script type="module">
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 register()
 
 const autocomplete = document.querySelector('perfect-autocomplete')
@@ -68,7 +68,7 @@ autocomplete.addEventListener('pac:select', (e) => {
 </form>
 
 <script type="module">
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 register()
 
 const autocomplete = document.querySelector('perfect-autocomplete')
@@ -141,7 +141,7 @@ Monitor loading state for custom UI:
 </div>
 
 <script type="module">
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 register()
 
 const autocomplete = document.querySelector('perfect-autocomplete')
@@ -165,7 +165,7 @@ setInterval(() => {
 ></perfect-autocomplete>
 
 <script type="module">
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 register()
 
 const autocomplete = document.querySelector('perfect-autocomplete')

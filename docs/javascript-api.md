@@ -89,7 +89,7 @@ autocomplete.renderItem = (item, html, { highlighted, index }) => {
 For complex data fetching scenarios, you can use the `fetchFn` prop (requires import of composables):
 
 ```javascript
-import { register, useFetch } from 'perfect-autocomplete'
+import { register, useFetch } from '@mikolaj.jeziorny/perfect-autocomplete'
 
 // Custom fetch with authentication
 autocomplete.fetchFn = async (query, signal) => {
@@ -115,7 +115,7 @@ import type {
   AutocompleteEventMap,
   RenderItemFunction,
   Placement
-} from 'perfect-autocomplete'
+} from '@mikolaj.jeziorny/perfect-autocomplete'
 
 // Type-safe element access
 const autocomplete = document.querySelector('perfect-autocomplete')!
@@ -134,7 +134,7 @@ autocomplete.addEventListener('pac:select', (e) => {
 ## Complete Example
 
 ```javascript
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 
 register()
 

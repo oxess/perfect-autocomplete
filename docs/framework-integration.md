@@ -6,7 +6,7 @@ Perfect Autocomplete works with any framework as a standard web component.
 
 ```jsx
 import { useEffect, useRef } from 'react'
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 
 // Register once at app startup
 register()
@@ -45,7 +45,7 @@ function SearchInput() {
 
 ```tsx
 import { useEffect, useRef } from 'react'
-import { register, AutocompleteItem } from 'perfect-autocomplete'
+import { register, AutocompleteItem } from '@mikolaj.jeziorny/perfect-autocomplete'
 
 register()
 
@@ -93,7 +93,7 @@ function SearchInput() {
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 
 register()
 
@@ -147,7 +147,7 @@ export class AppModule {}
 
 ```typescript
 // main.ts or app.component.ts
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 register()
 ```
 
@@ -177,7 +177,7 @@ export class AppComponent {
 ```svelte
 <script>
   import { onMount } from 'svelte'
-  import { register } from 'perfect-autocomplete'
+  import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 
   onMount(() => {
     register()
@@ -212,7 +212,7 @@ export default {
 
 ```jsx
 import { onMount } from 'solid-js'
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 
 function SearchInput() {
   let autocompleteRef
@@ -255,7 +255,7 @@ function SearchInput() {
 </div>
 
 <script type="module">
-  import { register } from 'perfect-autocomplete'
+  import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
   register()
 </script>
 ```
@@ -278,7 +278,7 @@ function SearchInput() {
 <div id="details"></div>
 
 <script type="module">
-  import { register } from 'perfect-autocomplete'
+  import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
   register()
 
   // Pass selected item to HTMX request
@@ -296,7 +296,7 @@ function SearchInput() {
 <perfect-autocomplete for="search" url="/api/search"></perfect-autocomplete>
 
 <script type="module">
-  import { register } from 'perfect-autocomplete'
+  import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 
   register()
 

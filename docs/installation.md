@@ -5,25 +5,25 @@
 ### Bun (Recommended)
 
 ```bash
-bun add perfect-autocomplete
+bun add @mikolaj.jeziorny/perfect-autocomplete
 ```
 
 ### npm
 
 ```bash
-npm install perfect-autocomplete
+npm install @mikolaj.jeziorny/perfect-autocomplete
 ```
 
 ### pnpm
 
 ```bash
-pnpm add perfect-autocomplete
+pnpm add @mikolaj.jeziorny/perfect-autocomplete
 ```
 
 ### Yarn
 
 ```bash
-yarn add perfect-autocomplete
+yarn add @mikolaj.jeziorny/perfect-autocomplete
 ```
 
 ## CDN
@@ -32,7 +32,7 @@ yarn add perfect-autocomplete
 
 ```html
 <script type="module">
-  import { register } from 'https://unpkg.com/perfect-autocomplete@latest/dist/perfect-autocomplete.es.js'
+  import { register } from 'https://unpkg.com/@mikolaj.jeziorny/perfect-autocomplete@latest/dist/perfect-autocomplete.es.js'
   register()
 </script>
 ```
@@ -40,7 +40,7 @@ yarn add perfect-autocomplete
 ### IIFE (Global)
 
 ```html
-<script src="https://unpkg.com/perfect-autocomplete@latest/dist/perfect-autocomplete.iife.js"></script>
+<script src="https://unpkg.com/@mikolaj.jeziorny/perfect-autocomplete@latest/dist/perfect-autocomplete.iife.js"></script>
 <script>
   PerfectAutocomplete.register()
 </script>
@@ -55,7 +55,7 @@ The custom element must be registered before use. You have two options:
 Import the register module to automatically register:
 
 ```javascript
-import 'perfect-autocomplete/register'
+import '@mikolaj.jeziorny/perfect-autocomplete/register'
 ```
 
 ### Manual Registration
@@ -63,7 +63,7 @@ import 'perfect-autocomplete/register'
 For more control, register manually:
 
 ```javascript
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 
 // Use default tag name
 register()

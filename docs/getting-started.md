@@ -7,16 +7,16 @@ Perfect Autocomplete is a high-quality, accessible autocomplete web component th
 ### Using npm/bun
 
 ```bash
-bun add perfect-autocomplete
+bun add @mikolaj.jeziorny/perfect-autocomplete
 # or
-npm install perfect-autocomplete
+npm install @mikolaj.jeziorny/perfect-autocomplete
 ```
 
 ### Using CDN
 
 ```html
 <script type="module">
-  import { register } from 'https://unpkg.com/perfect-autocomplete@latest/dist/perfect-autocomplete.es.js'
+  import { register } from 'https://unpkg.com/@mikolaj.jeziorny/perfect-autocomplete@latest/dist/perfect-autocomplete.es.js'
   register()
 </script>
 ```
@@ -26,7 +26,7 @@ npm install perfect-autocomplete
 ### Step 1: Import and Register
 
 ```javascript
-import { register } from 'perfect-autocomplete'
+import { register } from '@mikolaj.jeziorny/perfect-autocomplete'
 
 // Register the custom element
 register()

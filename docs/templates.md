@@ -184,7 +184,7 @@ Add CSS for your custom templates:
 Templates are fully typed:
 
 ```typescript
-import type { RenderItemFunction, AutocompleteItem } from 'perfect-autocomplete'
+import type { RenderItemFunction, AutocompleteItem } from '@mikolaj.jeziorny/perfect-autocomplete'
 
 interface UserItem extends AutocompleteItem {
   avatar: string
