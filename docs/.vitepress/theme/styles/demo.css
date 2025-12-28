@@ -176,3 +176,20 @@
   font-weight: 600;
   color: var(--vp-c-brand-1);
 }
+
+/* Hero demo mobile layout fix */
+@media (max-width: 768px) {
+  .VPHero .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .VPHero .main {
+    order: 1;
+  }
+
+  .VPHero .image {
+    order: 2;
+    margin-top: 32px;
+  }
+}
