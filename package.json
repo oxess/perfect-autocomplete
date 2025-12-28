@@ -1,6 +1,6 @@
 {
   "name": "@mikolaj.jeziorny/perfect-autocomplete",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A high-quality, accessible autocomplete web component",
   "type": "module",
   "main": "./dist/perfect-autocomplete.umd.js",
