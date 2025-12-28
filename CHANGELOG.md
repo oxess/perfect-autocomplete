@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/oxess/perfect-autocomplete/compare/v1.0.2...v1.1.0) (2025-12-28)
+
+
+### Features
+
+* **docs:** add interactive autocomplete demo to hero section ([beb7291](https://github.com/oxess/perfect-autocomplete/commit/beb7291c358a4764388b016606bebbef7cbb235c))
+
 ## [1.0.2](https://github.com/oxess/perfect-autocomplete/compare/v1.0.1...v1.0.2) (2025-12-28)
 
 
