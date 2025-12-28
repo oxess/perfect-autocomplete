@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/oxess/perfect-autocomplete/compare/v1.0.1...v1.0.2) (2025-12-28)
+
+
+### Bug Fixes
+
+* add publishConfig for scoped npm package ([5ba850c](https://github.com/oxess/perfect-autocomplete/commit/5ba850c8732343cb5c5244db085a7a1908e73441))
+
 ## [1.0.1](https://github.com/oxess/perfect-autocomplete/compare/v1.0.0...v1.0.1) (2025-12-28)
 
 
