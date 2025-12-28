@@ -66,6 +66,7 @@ function mockApiPlugin(): Plugin {
 export default defineConfig({
   title: 'Perfect Autocomplete',
   description: 'A high-quality, accessible autocomplete web component',
+  base: '/perfect-autocomplete/',
 
   vue: {
     template: {
