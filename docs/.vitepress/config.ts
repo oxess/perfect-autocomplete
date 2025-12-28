@@ -138,7 +138,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/your-org/perfect-autocomplete' }
+      { icon: 'github', link: 'https://github.com/oxess/perfect-autocomplete' }
     ],
 
     footer: {
