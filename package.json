@@ -1,5 +1,5 @@
 {
-  "name": "perfect-autocomplete",
+  "name": "@mikolaj.jeziorny/perfect-autocomplete",
   "version": "1.0.0",
   "description": "A high-quality, accessible autocomplete web component",
   "type": "module",
