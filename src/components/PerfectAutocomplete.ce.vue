@@ -24,7 +24,7 @@ import {
 } from '../utils/htm-renderer'
 import { emitOpen, emitClose, emitSelect, emitError, emitItemsLoaded } from '../utils/event-emitter'
 import { injectStyles } from '../utils/style-injector'
-import type { AutocompleteItem, RenderItemFunction, Placement, Theme } from '../utils/types'
+import type { AutocompleteItem, RenderItemFunction, Placement, Theme, FetchFunction } from '../utils/types'
 
 // Props with automatic type casting from attributes
 const props = withDefaults(
@@ -81,6 +81,9 @@ const dropdownState = ref<'open' | 'closing' | 'closed'>('closed')
 
 // Custom render function (can be set programmatically)
 const customRenderItem = ref<RenderItemFunction | null>(null)
+
+// Custom fetch function (can be set programmatically)
+const customFetchFn = ref<FetchFunction | null>(null)
 
 // Get host element for event emission
 const { getHostElement, registerCleanup } = useCustomElementLifecycle()
@@ -297,10 +300,24 @@ function connectToInput() {
 
 // Watch for debounced query changes
 watch(debouncedQuery, async (newQuery) => {
-  if (!props.url) return
+  // Skip if no data source configured
+  if (!props.url && !customFetchFn.value) return
+
+  // Skip if query is too short
+  if (newQuery.length < props.minChars) {
+    fetchState.items.value = []
+    return
+  }
 
   try {
-    await fetchState.fetch(newQuery)
+    // Use custom fetch function if available, otherwise use URL fetch
+    if (customFetchFn.value) {
+      const abortController = new AbortController()
+      const items = await customFetchFn.value(newQuery, abortController.signal)
+      fetchState.items.value = items
+    } else {
+      await fetchState.fetch(newQuery)
+    }
 
     // Emit items-loaded event
     const host = getHostElement()
@@ -358,15 +375,19 @@ defineExpose({
   /** Refresh data */
   refresh: () => fetchState.fetch(query.value),
   /** Set custom render function */
-  set renderItem(fn: RenderItemFunction) {
+  setRenderItem(fn: RenderItemFunction) {
     customRenderItem.value = fn
   },
+  /** Set custom fetch function (overrides URL) */
+  setFetchFn(fn: FetchFunction) {
+    customFetchFn.value = fn
+  },
   /** Get current items */
-  get items() {
+  getItems() {
     return fetchState.items.value
   },
   /** Get loading state */
-  get isLoading() {
+  getIsLoading() {
     return fetchState.isLoading.value
   }
 })

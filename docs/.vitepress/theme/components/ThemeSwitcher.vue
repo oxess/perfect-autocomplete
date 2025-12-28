@@ -3,6 +3,26 @@ import { ref, onMounted, nextTick, watch } from 'vue'
 
 type Theme = 'classic' | 'basic' | 'modern' | 'bootstrap' | 'tailwind'
 
+interface MockUser {
+  id: number
+  label: string
+  value: string
+  email: string
+  role: string
+}
+
+// Client-side mock data for theme switcher
+const mockUsers: MockUser[] = [
+  { id: 1, label: 'Alice Johnson', value: 'alice', email: 'alice@example.com', role: 'Developer' },
+  { id: 2, label: 'Bob Smith', value: 'bob', email: 'bob@example.com', role: 'Designer' },
+  { id: 3, label: 'Carol Williams', value: 'carol', email: 'carol@example.com', role: 'Manager' },
+  { id: 4, label: 'David Brown', value: 'david', email: 'david@example.com', role: 'Developer' },
+  { id: 5, label: 'Emma Davis', value: 'emma', email: 'emma@example.com', role: 'QA Engineer' },
+  { id: 6, label: 'Frank Miller', value: 'frank', email: 'frank@example.com', role: 'DevOps' },
+  { id: 7, label: 'Grace Wilson', value: 'grace', email: 'grace@example.com', role: 'Product Owner' },
+  { id: 8, label: 'Henry Taylor', value: 'henry', email: 'henry@example.com', role: 'Developer' },
+]
+
 const themes: { value: Theme; label: string; description: string }[] = [
   { value: 'classic', label: 'Classic', description: 'Traditional, timeless design' },
   { value: 'basic', label: 'Basic', description: 'Minimal, simple styling' },
@@ -18,6 +38,28 @@ const autocompleteRef = ref<HTMLElement | null>(null)
 onMounted(async () => {
   const { register } = await import('../../../../src/index')
   register()
+
+  await nextTick()
+
+  const el = autocompleteRef.value
+  if (!el) return
+
+  const autocomplete = el as any
+
+  // Set up custom fetch function using client-side mock data
+  autocomplete.setFetchFn(async (query: string): Promise<MockUser[]> => {
+    await new Promise(resolve => setTimeout(resolve, 100))
+
+    if (!query) return mockUsers.slice(0, 6)
+
+    const lowerQuery = query.toLowerCase()
+    const filtered = mockUsers.filter(item =>
+      item.label.toLowerCase().includes(lowerQuery) ||
+      item.role.toLowerCase().includes(lowerQuery)
+    )
+
+    return filtered.slice(0, 6)
+  })
 })
 
 watch(currentTheme, async () => {
@@ -59,9 +101,7 @@ watch(currentTheme, async () => {
       <perfect-autocomplete
         ref="autocompleteRef"
         :for="inputId"
-        url="/api/mock?type=users"
         :theme="currentTheme"
-        query-param="q"
         min-chars="1"
         debounce="200"
         max-items="6"

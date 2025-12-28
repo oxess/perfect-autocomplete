@@ -16,6 +16,61 @@ interface MockItem {
 type DataType = 'users' | 'products' | 'cities'
 type Theme = 'classic' | 'basic' | 'modern' | 'bootstrap' | 'tailwind'
 
+// Client-side mock data (works on static hosting like GitHub Pages)
+const mockData: Record<DataType, MockItem[]> = {
+  users: [
+    { id: 1, label: 'Alice Johnson', value: 'alice', email: 'alice@example.com', role: 'Developer' },
+    { id: 2, label: 'Bob Smith', value: 'bob', email: 'bob@example.com', role: 'Designer' },
+    { id: 3, label: 'Carol Williams', value: 'carol', email: 'carol@example.com', role: 'Manager' },
+    { id: 4, label: 'David Brown', value: 'david', email: 'david@example.com', role: 'Developer' },
+    { id: 5, label: 'Emma Davis', value: 'emma', email: 'emma@example.com', role: 'QA Engineer' },
+    { id: 6, label: 'Frank Miller', value: 'frank', email: 'frank@example.com', role: 'DevOps' },
+    { id: 7, label: 'Grace Wilson', value: 'grace', email: 'grace@example.com', role: 'Product Owner' },
+    { id: 8, label: 'Henry Taylor', value: 'henry', email: 'henry@example.com', role: 'Developer' },
+    { id: 9, label: 'Ivy Chen', value: 'ivy', email: 'ivy@example.com', role: 'UX Designer' },
+    { id: 10, label: 'Jack Martinez', value: 'jack', email: 'jack@example.com', role: 'Backend Developer' },
+    { id: 11, label: 'Karen Lee', value: 'karen', email: 'karen@example.com', role: 'Frontend Developer' },
+    { id: 12, label: 'Leo Anderson', value: 'leo', email: 'leo@example.com', role: 'Tech Lead' },
+    { id: 13, label: 'Mia Thompson', value: 'mia', email: 'mia@example.com', role: 'Data Scientist' },
+    { id: 14, label: 'Noah Garcia', value: 'noah', email: 'noah@example.com', role: 'DevOps Engineer' },
+    { id: 15, label: 'Olivia Robinson', value: 'olivia', email: 'olivia@example.com', role: 'Scrum Master' },
+  ],
+  products: [
+    { id: 1, label: 'MacBook Pro 16"', value: 'macbook-pro', category: 'Laptops', price: 2499 },
+    { id: 2, label: 'iPhone 15 Pro', value: 'iphone-15', category: 'Phones', price: 999 },
+    { id: 3, label: 'iPad Air', value: 'ipad-air', category: 'Tablets', price: 599 },
+    { id: 4, label: 'AirPods Pro', value: 'airpods-pro', category: 'Audio', price: 249 },
+    { id: 5, label: 'Apple Watch Ultra', value: 'watch-ultra', category: 'Wearables', price: 799 },
+    { id: 6, label: 'Magic Keyboard', value: 'magic-keyboard', category: 'Accessories', price: 299 },
+    { id: 7, label: 'Mac Mini M2', value: 'mac-mini', category: 'Desktops', price: 599 },
+    { id: 8, label: 'MacBook Air 15"', value: 'macbook-air', category: 'Laptops', price: 1299 },
+    { id: 9, label: 'iPhone 15', value: 'iphone-15-base', category: 'Phones', price: 799 },
+    { id: 10, label: 'iPad Pro 12.9"', value: 'ipad-pro', category: 'Tablets', price: 1099 },
+    { id: 11, label: 'AirPods Max', value: 'airpods-max', category: 'Audio', price: 549 },
+    { id: 12, label: 'Apple Watch Series 9', value: 'watch-series-9', category: 'Wearables', price: 399 },
+    { id: 13, label: 'Magic Trackpad', value: 'magic-trackpad', category: 'Accessories', price: 149 },
+    { id: 14, label: 'Mac Studio', value: 'mac-studio', category: 'Desktops', price: 1999 },
+    { id: 15, label: 'Pro Display XDR', value: 'pro-display', category: 'Monitors', price: 4999 },
+  ],
+  cities: [
+    { id: 1, label: 'New York', value: 'new-york', country: 'United States', population: 8336817 },
+    { id: 2, label: 'Los Angeles', value: 'los-angeles', country: 'United States', population: 3979576 },
+    { id: 3, label: 'London', value: 'london', country: 'United Kingdom', population: 8982000 },
+    { id: 4, label: 'Paris', value: 'paris', country: 'France', population: 2161000 },
+    { id: 5, label: 'Tokyo', value: 'tokyo', country: 'Japan', population: 13960000 },
+    { id: 6, label: 'Berlin', value: 'berlin', country: 'Germany', population: 3645000 },
+    { id: 7, label: 'Sydney', value: 'sydney', country: 'Australia', population: 5312000 },
+    { id: 8, label: 'Toronto', value: 'toronto', country: 'Canada', population: 2930000 },
+    { id: 9, label: 'Singapore', value: 'singapore', country: 'Singapore', population: 5454000 },
+    { id: 10, label: 'Dubai', value: 'dubai', country: 'UAE', population: 3400000 },
+    { id: 11, label: 'Amsterdam', value: 'amsterdam', country: 'Netherlands', population: 873000 },
+    { id: 12, label: 'Barcelona', value: 'barcelona', country: 'Spain', population: 1620000 },
+    { id: 13, label: 'San Francisco', value: 'san-francisco', country: 'United States', population: 874000 },
+    { id: 14, label: 'Seoul', value: 'seoul', country: 'South Korea', population: 9776000 },
+    { id: 15, label: 'Mumbai', value: 'mumbai', country: 'India', population: 20700000 },
+  ]
+}
+
 const props = withDefaults(defineProps<{
   title?: string
   dataType?: DataType
@@ -42,7 +97,6 @@ const placeholderMap = {
 }
 
 const placeholder = computed(() => placeholderMap[props.dataType])
-const apiUrl = computed(() => `/api/mock?type=${props.dataType}`)
 
 function logEvent(name: string, detail?: Record<string, unknown>) {
   const time = new Date().toLocaleTimeString()
@@ -86,12 +140,37 @@ onMounted(async () => {
   const el = autocompleteRef.value
   if (!el) return
 
+  const autocomplete = el as any
+
+  // Set up custom fetch function using client-side mock data
+  // This works on static hosting (GitHub Pages) without needing a server
+  autocomplete.setFetchFn(async (query: string): Promise<MockItem[]> => {
+    // Simulate network delay for realistic demo
+    await new Promise(resolve => setTimeout(resolve, 150))
+
+    const data = mockData[props.dataType]
+    if (!query) return data.slice(0, 8)
+
+    const lowerQuery = query.toLowerCase()
+    const filtered = data.filter(item => {
+      // Search in label
+      if (item.label.toLowerCase().includes(lowerQuery)) return true
+      // Search in role (for users)
+      if (item.role?.toLowerCase().includes(lowerQuery)) return true
+      // Search in category (for products)
+      if (item.category?.toLowerCase().includes(lowerQuery)) return true
+      // Search in country (for cities)
+      if (item.country?.toLowerCase().includes(lowerQuery)) return true
+      return false
+    })
+
+    return filtered.slice(0, 8)
+  })
+
   // Set up custom render if enabled
   if (props.customRender) {
-    const autocomplete = el as any
-
     if (props.dataType === 'users') {
-      autocomplete.renderItem = (item: MockItem, h: typeof html, { highlighted }: { highlighted: boolean }) => h`
+      autocomplete.setRenderItem((item: MockItem, h: typeof html, { highlighted }: { highlighted: boolean }) => h`
         <div class="demo-user-item ${highlighted ? 'highlighted' : ''}">
           <div class="demo-user-item__avatar">${getInitials(item.label)}</div>
           <div class="demo-user-item__info">
@@ -99,9 +178,9 @@ onMounted(async () => {
             <div class="demo-user-item__email">${item.email} · ${item.role}</div>
           </div>
         </div>
-      `
+      `)
     } else if (props.dataType === 'products') {
-      autocomplete.renderItem = (item: MockItem, h: typeof html, { highlighted }: { highlighted: boolean }) => h`
+      autocomplete.setRenderItem((item: MockItem, h: typeof html, { highlighted }: { highlighted: boolean }) => h`
         <div class="demo-product-item ${highlighted ? 'highlighted' : ''}">
           <div class="demo-product-item__info">
             <div class="demo-product-item__name">${item.label}</div>
@@ -109,7 +188,7 @@ onMounted(async () => {
           </div>
           <div class="demo-product-item__price">${formatPrice(item.price || 0)}</div>
         </div>
-      `
+      `)
     }
   }
 
@@ -144,9 +223,7 @@ onMounted(async () => {
       <perfect-autocomplete
         ref="autocompleteRef"
         :for="inputId"
-        :url="apiUrl"
         :theme="theme"
-        query-param="q"
         min-chars="1"
         debounce="200"
         max-items="8"
